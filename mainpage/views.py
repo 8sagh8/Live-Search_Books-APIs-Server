@@ -17,7 +17,7 @@ def MainIndexView(request):
 
         if user is not None:
             auth.login(request, user)
-            return redirect("home/")
+            return redirect("sammar_rest_api/")
         else:
             messages.info(request, 'Invalid Username OR Password')
             return redirect('/')

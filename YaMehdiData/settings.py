@@ -40,8 +40,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'rest_framework',
     'serverAPI.apps.ServerapiConfig',
-    'haq.apps.HaqConfig',
     'mainpage.apps.MainpageConfig',
+    'haq.apps.HaqConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

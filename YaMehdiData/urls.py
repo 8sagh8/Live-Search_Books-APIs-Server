@@ -22,9 +22,11 @@ from serverAPI.api import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),    #route to ADMIN Page only
-    path('', include('mainpage.urls')), #route to Main Login Page only
-    path('home/', include('haq.urls')), #route to Haq About Page only
     
+    path('', include('mainpage.urls')), #route to Main Login Page only
+    # path to Create Server APIs
+    path('sammar_rest_api/', include('haq.urls')), #route to Haq App but won't display any page
+
     # path to serverAPI
     path('rest_api/authPerson_list/', AuthPersonList.as_view(), name='authPerson_list'),
     path('rest_api/topics_list/', TopicList.as_view(), name='topics_list'),
