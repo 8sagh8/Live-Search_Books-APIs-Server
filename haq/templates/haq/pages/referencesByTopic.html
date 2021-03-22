@@ -1,0 +1,85 @@
+{% extends 'haq/sample.html' %}
+{% block title%}
+    {% if topic == None %}
+        List of References
+    {% else %}
+        References of {{topic}}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <br>
+    <div class="container">
+        <div  class="move_center">
+            {% if topic == None %}
+                <h1 class="move_center">List of References</h1>
+            {% else %}
+                <h1 class="move_center">Topic: {{topic}}</h1>
+            {% endif %}
+            
+            {% if auth_person == "Authorized Person" %}
+                    <button type="button" class="btn btn-primary btn-lg">Add New Reference</button>
+                {% endif %}
+            
+            <br><br>
+            {% if isServerLocal == True %}
+            <form action = '{% url 'haq:reference' %}' method="POST" class="move_center">
+                {% csrf_token %}   <!--this is to avoid fraugry-->
+                <input type="text" name="searchWord" size="50" value="" placeholder="Search References">
+                
+                <input type="submit" value="Click to Search">
+            </form>
+            <br>
+            {% endif %}
+            <a href="{% url 'haq:topics' %}" class="btn btn-primary " role="button">Go to Topics Page</a>
+        </div>
+        <br>
+        
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>No.</th>
+                <th>Book</th>
+                <th>Volume or Paragraph</th>
+                <th>Page or Chapter </th>
+                <th>Hadees or Verse</th>
+                <th>
+                    {% if topic == None %}Topic{% endif %}
+                </th>
+                <th>Speaker</th>
+                <th>For Person</th>
+                
+            </tr>
+            </thead>
+            <tbody>
+                {% for ref in refer %}
+                    <tr>
+                        <th>{{forloop.revcounter}}</th>
+                        <td>{{ref.book}}</td>
+                        <td>{{ref.vol_para}}</td>
+                        <td>{{ref.page_chapter}}</td>
+                        <td>{{ref.hadees_verse}}</td>
+                        <td>
+                            {% if topic == None %}
+                                {{ref.subject}}}
+                            {% endif %}
+                        </td>
+                        <td>{{ref.speaker}}</td>
+                        <td>{{ref.personFor}}</td>
+                        
+                    </tr>
+                    <tr>
+                        <td>Description:- </td>
+                        <td colspan="4"> <b>{{ref.description}}</b> </td>
+                    </tr>
+                    
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="container">
+        <a href="{% url 'haq:topics' %}" class="btn btn-primary btn-block" role="button">Back to Topic Page</a>
+    </div>
+
+
+{% endblock %}

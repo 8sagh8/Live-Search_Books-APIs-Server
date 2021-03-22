@@ -1,0 +1,47 @@
+{% extends 'haq/sample.html' %}
+{% block title%}List of book as per languages {% endblock %}
+
+{% block body %}
+    <span id = "titlespan">
+        <div class="move_center" >
+            <h1>List of Book According to Languages</h1>
+  
+            {% if auth_person == "Authorized Person" %}
+                <button type="button" class="btn btn-primary btn-lg">Add New Language</button>
+            {% endif %}
+        </span>
+     
+        </div>
+
+        <br>
+        <div class="move_center">
+            <caption>List of languages and total number of books: {{total_books}} </caption>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Serial Number</th>
+                        <th scope="col">Languages</th>
+                        <th scope="col">Total Books</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for k, v in dict_languages.items %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>
+                                {% if isServerLocal == True %}
+                                <a href={% url 'haq:getLanguagesBooks' v.0 %} class="a_book" >
+                                    {{k}}
+                                </a>
+                                {% else %}
+                                    {{k}}
+                                {% endif %}
+                            </td>
+                            <td>{{ v.1 }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </span>
+{% endblock %}
