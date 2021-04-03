@@ -5,6 +5,7 @@ from .serializers import *
 from haq.models import *
 import json
 from .getData import *
+from .postData import *
 
 # Get, Put, Post, Delete
 # Authorized Person List
@@ -63,10 +64,10 @@ class NeedList(APIView):
         model = get_need_json()
         for data in model.values():
             return Response(data)
+
     def post(self, request):
-        gotValue = request.data
-        print("==>", gotValue, flush=True)
-        return Response(gotValue)
+        post_need_json(request.data)
+        return Response()
 
 # Language List
 class LanguageList(APIView):
