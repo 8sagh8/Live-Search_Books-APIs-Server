@@ -63,6 +63,10 @@ class NeedList(APIView):
         model = get_need_json()
         for data in model.values():
             return Response(data)
+    def post(self, request):
+        gotValue = request.data
+        print("==>", gotValue, flush=True)
+        return Response(gotValue)
 
 # Language List
 class LanguageList(APIView):
