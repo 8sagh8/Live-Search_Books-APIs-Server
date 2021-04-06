@@ -64,7 +64,7 @@ class NeedList(APIView):
         model = get_need_json()
         for data in model.values():
             return Response(data)
-
+    
     def post(self, request):
         post_need_json(request.data)
         return Response()

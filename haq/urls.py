@@ -9,6 +9,9 @@ urlpatterns = [
     path('logout', views.LogOutView, name="logout"),
     # JSON Files routes
     path('', views.CreateJSONView, name="createJSON"),
+    path('postJSON', views.PostJSONView, name="postJSON"),
+    path('addNeed', views.AddNeedView, name="addName"),
+    path('deleteNeed', views.DeleteNeedView, name="addName"),
 
     #  other ways to write route
     # path('getTopic/', views.GetTopicView, name="getTopic"),
@@ -22,7 +25,6 @@ urlpatterns = [
     # url(r'getLanguagesBooks/(?P<language_id>[0-9]+)/$', views.GetLanguagesBooksView, name="getLanguagesBooks"),
     # url(r'^getTopic/(?P<topic_id>\d+)/', views.GetTopicView, name="getTopic"),
     # path(r'getPersonRef/<int:person_id>/', views.GetPersonRefView, name="getPersonRef"),
-    
 ]
 
 

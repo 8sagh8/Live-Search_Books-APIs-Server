@@ -10,4 +10,5 @@ from . import views
 
 app_name = "serverAPI"
 
-urlpatterns = []
+urlpatterns = [
+]

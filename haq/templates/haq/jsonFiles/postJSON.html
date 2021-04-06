@@ -1,0 +1,72 @@
+{% extends 'haq/sample.html' %}
+
+{% block title%}POST into Database {% endblock %}
+
+{% block body %}
+    {% if auth_person == "Authorized Person" %}
+        <div class="move_center">
+            <br>
+            <h4> Post into Database </h4>
+            <p>Click below button to post data into database from JSON files 
+                and it will show you each entry for your confirmation before persisting 
+                it into Database.
+            </p>
+            <br>
+            <form action = '{% url 'haq:postJSON' %}' method="POST" class="move_center">
+                {% csrf_token %}   <!--this is to avoid fraugry-->
+                <input type="submit" value="Post Data into Database">
+            </form>
+        </div>
+        <hr>
+
+        <div class="move_center">
+            {% if need_list.0 > 0 %} 
+                <h3>Needs' New Data Posted</h3>
+                
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">User</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for need in need_list.1 %}
+                            <tr>
+                                <form action="addNeed" method="POST">
+                                    {% csrf_token %}
+                                <th scope="row">{{forloop.counter}}
+                                    <input name="needID" value="{{need.0}}" style="display:none;">
+                                </th>
+                                
+                                <td>{{need.1}}
+                                    <input name="needName" value="{{need.1}}" style="display:none;">
+                                </td>
+                                <td>{{need.2}}</td>
+                                <td>{{need.3}}
+                                    <input name="needUser" value="{{need.3}}" style="display:none;">
+                                </td>
+                                <td>
+                                    <input type="submit" value="Add Item" />
+                                </td>
+                                </form>
+                                <form action="deleteNeed" method="POST">
+                                    {% csrf_token %}
+                                    <td>
+                                        <input name="needID" value="{{need.0}}" style="display:none;">
+                                        <input type="submit" value="Don't Add" />
+                                    </td>
+                                </form>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                  </table>
+                  
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}

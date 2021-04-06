@@ -5,6 +5,10 @@ from .models import *
 from django.contrib.auth.models import User, auth
 import json, io, sys
 import requests
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from serverAPI.serializers import *
 
 ################################################
 # ~~~~~ General Functions ~~~~~~~~~ #
@@ -20,6 +24,27 @@ def auth_Person_Function(current_user_name):
 def LogOutView(request):
     auth.logout(request)
     return redirect("/")
+
+### Delete data from JSON File
+def deleteData_JSON(file_name, item_id, dictName):
+    fileName = file_name
+    itemID = item_id 
+
+    jsonFile = open(f'staticfiles/{fileName}')
+    data = json.load(jsonFile)
+    jsonFile.close()
+
+    for index in range(len(data['need'])):
+        if data['need'][index]['id'] == str(itemID):
+            data['need'].pop(index)
+            break
+
+    my_json = json.dumps(data, indent=1)
+
+    with open(f'staticfiles/{fileName}', mode='w+') as myFile:
+        myFile.write(my_json)
+    myFile.close()
+
 
 ################################################
 # ~~~~~ JSON FILES Functions & VIEWS ~~~~~~~~~ #
@@ -172,7 +197,7 @@ def _createNeedJSON():
             "id": n.id, 
             "_need": n._need,
             "data_status" : n.data_status,
-            "data_user" : '',
+            "data_user" : n.data_user,
         })
 
     # will store need json in here
@@ -269,6 +294,7 @@ def _createReferenceJSON():
     
     return "Reference"
 
+########################################################
 def CreateJSONView(request):
     auth_person = auth_Person_Function(str(request.user))
     msg = []
@@ -304,7 +330,110 @@ def CreateJSONView(request):
         msg.append(created_file)
 
 
-    return render(request, 'haq/jsonFiles/createJson.html', {
+    return render(request, 'haq/jsonFiles/createJSON.html', {
         'auth_person' : auth_person,
         "msg" : msg,
+    })
+
+
+############################################
+def PostJSONView(request):
+    auth_person = auth_Person_Function(str(request.user))
+    msg = []
+    need_list = None
+    if request.method == "POST":
+        # create_authPerson = _createAuthPersonJSON(request)
+        # msg.append(create_authPerson)
+        # # create Topics File
+        # created_file = _createTopicsJSON()
+        # msg.append(created_file)
+        # # create Categories File
+        # created_file = _createCategoriesJSON()
+        # msg.append(created_file)
+        # # create Status File
+        # created_file = _createStatusJSON()
+        # msg.append(created_file)
+        # # create Religion File
+        # created_file = _createReligionJSON()
+        # msg.append(created_file)
+        # # create Person File
+        # created_file = _createPersonJSON()
+        # msg.append(created_file)
+        # create Need File
+        need_list = _postNeedJSON()
+        # # create Language File
+        # created_file = _createLanguageJSON()
+        # msg.append(created_file)
+        # # create Books File
+        # created_file = _createBookJSON()
+        # msg.append(created_file)
+        # # create References File
+        # created_file = _createReferenceJSON()
+        # msg.append(created_file)
+
+
+    return render(request, 'haq/jsonFiles/postJSON.html', {
+        'auth_person' : auth_person,
+        'need_list' : need_list,
+    })
+
+    ##############################################
+    ################################################
+    # ~~~~~ POST FUNCTIONS INTO DATABASE ~~~~~~~~~ #
+    ################################################
+
+    # POST 'needJSON.json' file into DATABASE
+def _postNeedJSON():
+    data_list = []
+
+    jsonFile = open('staticfiles/needJSON.json')
+    data = json.load(jsonFile)
+    jsonFile.close()
+
+    for need in data['need']:
+        if '-N-' == need['data_status']:
+            temp = []
+            for v in need.values():
+                temp.append(v)
+            data_list.append(temp)
+    return (len(data_list), data_list)
+    
+def AddNeedView(request):
+    auth_person = auth_Person_Function(str(request.user))
+    need_list = []
+
+    if request.method == "POST":
+        needID = request.POST["needID"]
+        needName = request.POST["needName"]
+        needUser = request.POST["needUser"]
+
+        # persisting data into database
+        new_value = Need(_need = needName, data_status = '-P-', data_user = needUser)
+        new_value.save()
+
+        # deleting data from JSON file
+        print("before", flush=True)
+        deleteData_JSON("needJSON.json", eval(needID), 'need') 
+        print("after", flush=True)
+        need_list = _postNeedJSON() # get fresh data
+
+    return render(request, 'haq/jsonFiles/postJSON.html', {
+        'auth_person' : auth_person,
+        "need_list" : need_list
+    })
+
+def DeleteNeedView(request):
+    auth_person = auth_Person_Function(str(request.user))
+    need_list = []
+
+    if request.method == "POST":
+        needID = request.POST["needID"]
+
+        # deleting data from JSON file
+        deleteData_JSON("needJSON.json", eval(needID), 'need') 
+        need_list = _postNeedJSON() # get fresh data
+
+    return render(request, 'haq/jsonFiles/postJSON.html', {
+        'auth_person' : auth_person,
+        "need_list" : need_list
     })

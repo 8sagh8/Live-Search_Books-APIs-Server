@@ -2,17 +2,17 @@
  "authPerson": [
   {
    "name": "Admin",
-   "data_status": "P",
+   "data_status": "-P-",
    "data_user": ""
   },
   {
    "name": "Sammar",
-   "data_status": "P",
+   "data_status": "-P-",
    "data_user": ""
   },
   {
    "name": "sam",
-   "data_status": "P",
+   "data_status": "-P-",
    "data_user": ""
   }
  ]

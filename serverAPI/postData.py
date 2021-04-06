@@ -56,10 +56,17 @@ def post_need_json(postValue):
     data = json.load(jsonFile)
     jsonFile.close() # Closing file
 
+    if type(data['need'][-1]['id']) == str:
+        unique_id = eval(data['need'][-1]['id'])
+    else:
+        unique_id = data['need'][-1]['id']
+
+    unique_id = str(unique_id + 1)
+    
     data['need'].append({
-        'id':'-1', '_need': 
-        postValue['newItem'], 
-        'data_status':'t', 
+        'id': unique_id, 
+        '_need': postValue['newItem'], 
+        'data_status':'-N-', 
         'data_user': postValue['curr_user']
         })
 

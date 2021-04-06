@@ -59,7 +59,7 @@ class Language(models.Model):
 # Need models here.
 class Need(models.Model):
     _need = models.CharField(max_length=9)
-    data_status = models.CharField(max_length=1, default='P')
+    data_status = models.CharField(max_length=3, default='-P-')
     data_user = models.CharField(max_length=10, default='Admin')
 
     def __str__(self):
@@ -69,7 +69,7 @@ class Need(models.Model):
 # Religion / Sect models here.
 class Religion(models.Model):
     _sect = models.CharField(max_length=20)
-    data_status = models.CharField(max_length=1, default='P')
+    data_status = models.CharField(max_length=3, default='-P-')
     data_user = models.CharField(max_length=10, default='Admin')
 
     def __str__(self):
@@ -79,7 +79,7 @@ class Religion(models.Model):
 # Status models here.
 class Status(models.Model):
     _status = models.CharField(max_length=16)
-    data_status = models.CharField(max_length=1, default='P')
+    data_status = models.CharField(max_length=3, default='-P-')
     data_user = models.CharField(max_length=10, default='Admin')
 
     def __str__(self):
@@ -95,7 +95,7 @@ class Book(models.Model):
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
     need = models.ForeignKey(Need, on_delete=models.CASCADE)
     lang = models.ForeignKey(Language, on_delete=models.CASCADE)
-    data_status = models.CharField(max_length=1, default='P')
+    data_status = models.CharField(max_length=3, default='-P-')
     data_user = models.CharField(max_length=10, default='Admin')
 
     def __str__(self):
@@ -114,7 +114,7 @@ class Reference(models.Model):
     page_chapter = models.IntegerField()
     hadees_verse = models.IntegerField()
     description = models.TextField(max_length=500, null=True)
-    data_status = models.CharField(max_length=1, default='P')
+    data_status = models.CharField(max_length=3, default='-P-')
     data_user = models.CharField(max_length=10, default='Admin')
 
     def __str__(self):
