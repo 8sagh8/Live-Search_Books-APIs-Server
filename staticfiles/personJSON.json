@@ -367,6 +367,14 @@
    "_death_year": "0",
    "data_status": "-P-",
    "data_user": ""
+  },
+  {
+   "id": 47,
+   "_p_name": "Bibi Fatima",
+   "_birth_year": "0",
+   "_death_year": "11",
+   "data_status": "P",
+   "data_user": ""
   }
  ]
 }
