@@ -104,8 +104,8 @@
   },
   {
    "id": 18,
-   "_topic": "Hidayat - Guidance",
-   "data_status": "-P-",
+   "_topic": "Hidayat | Rehmat | Shifa'at",
+   "data_status": "P",
    "data_user": ""
   },
   {
@@ -303,6 +303,18 @@
   {
    "id": 51,
    "_topic": "Ibadat",
+   "data_status": "P",
+   "data_user": ""
+  },
+  {
+   "id": 52,
+   "_topic": "Manzilat Haroon | ALI",
+   "data_status": "P",
+   "data_user": ""
+  },
+  {
+   "id": 53,
+   "_topic": "Namaz Na Parhna",
    "data_status": "P",
    "data_user": ""
   }
