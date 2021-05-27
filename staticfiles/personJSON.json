@@ -391,6 +391,14 @@
    "_death_year": "0",
    "data_status": "P",
    "data_user": ""
+  },
+  {
+   "id": 50,
+   "_p_name": "prophet ibrahim",
+   "_birth_year": "0",
+   "_death_year": "0",
+   "data_status": "P",
+   "data_user": ""
   }
  ]
 }

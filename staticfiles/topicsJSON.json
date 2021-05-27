@@ -104,7 +104,7 @@
   },
   {
    "id": 18,
-   "_topic": "Hidayat | Rehmat | Shifa'at",
+   "_topic": "Madad | Hidayat | Rehmat | Shifa'at",
    "data_status": "P",
    "data_user": ""
   },
@@ -315,6 +315,48 @@
   {
    "id": 53,
    "_topic": "Namaz Na Parhna",
+   "data_status": "P",
+   "data_user": ""
+  },
+  {
+   "id": 54,
+   "_topic": "level | status | fazilat",
+   "data_status": "P",
+   "data_user": ""
+  },
+  {
+   "id": 55,
+   "_topic": "Jabr | force | La Ikraha",
+   "data_status": "P",
+   "data_user": ""
+  },
+  {
+   "id": 56,
+   "_topic": "Dua | Pukarna | Hajat Talab Karna",
+   "data_status": "P",
+   "data_user": ""
+  },
+  {
+   "id": 57,
+   "_topic": "Zakat | Sadqa | Qarze Hasana",
+   "data_status": "P",
+   "data_user": ""
+  },
+  {
+   "id": 58,
+   "_topic": "Hukum Allah dega | Explain bhi",
+   "data_status": "P",
+   "data_user": ""
+  },
+  {
+   "id": 59,
+   "_topic": "halala | 3 talaq k baad kisi aur se nikah",
+   "data_status": "P",
+   "data_user": ""
+  },
+  {
+   "id": 60,
+   "_topic": "Shirk | Allah ki sifat aur hum",
    "data_status": "P",
    "data_user": ""
   }
